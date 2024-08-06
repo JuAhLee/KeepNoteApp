@@ -8,7 +8,7 @@ import tagsReducer from "./tags/tagsSlice";
 export const store = configureStore({
   reducer: {
     menu: menuReducer,
-    modaa: modalReducer,
+    modal: modalReducer,
     tags: tagsReducer,
     notesList: notesListReducer,
   },
