@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
 
       <Container>
-        <div className="nav__page-title"> {getStandardName(state)}</div>
+        <div className="nav__page-title">{getStandardName(state)}</div>
 
         {state !== "Trash" && state !== "Archive" && (
           <ButtonFill

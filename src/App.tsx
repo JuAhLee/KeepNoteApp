@@ -17,7 +17,7 @@ function App() {
   const { viewEditTagsModal } = useAppSelector((state) => state.modal);
 
   return (
-    <div className="App">
+    <div className="app">
       {viewEditTagsModal && <TagsModal type="edit" />}
 
       <ToastContainer
