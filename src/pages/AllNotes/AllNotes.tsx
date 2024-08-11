@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { Container } from "../ErrorPage/ErrorPage.styles";
-import { ButtonOutline, EmptyMsgBox } from "../../styles/styles";
+
+import { ButtonOutline, Container, EmptyMsgBox } from "../../styles/styles";
 import { Box, InputBox, TopBox } from "./AllNotes.styles";
 import { toggleFiltersModal } from "../../store/modal/modalSlice";
+import getAllNotes from "../../utils/getAllNotes";
 
 const AllNotes = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +36,10 @@ const AllNotes = () => {
               </ButtonOutline>
             </div>
           </TopBox>
-          <Box>{/* notes */}</Box>
+          <Box>
+            {/* notes */}
+            {getAllNotes(mainNotes, filter)}
+          </Box>
         </>
       )}
     </Container>
