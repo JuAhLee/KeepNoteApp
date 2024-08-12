@@ -5,10 +5,10 @@ import NoteCard from "../NoteCard/NoteCard";
 
 interface MainWrapperProps {
   notes: Note[];
-  type: string | undefined;
+  type: string;
 }
 
-const MainWrapper: FC<MainWrapperProps> = ({ notes, type }) => {
+const MainWrapper = ({ notes, type }: MainWrapperProps) => {
   return (
     <NotesContainer>
       {notes.map((note) => (
