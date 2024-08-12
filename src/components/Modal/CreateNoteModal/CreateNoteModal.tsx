@@ -18,6 +18,7 @@ import { FaPlus, FaTimes } from "react-icons/fa";
 import TagsModal from "../TagsModal/TagsModal";
 import { addTags } from "../../../store/tags/tagsSlice";
 import { v4 } from "uuid";
+import TextEditor from "../../TextEditor/TextEditor";
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
@@ -71,6 +72,10 @@ const CreateNoteModal = () => {
           onChange={(e) => setNoteTitle(e.target.value)}
         />
 
+        <div>
+          <TextEditor color={noteColor} value={value} setValue={setValue} />
+        </div>
+
         <div className="createNote__create-btn">
           <ButtonFill>
             {editNote ? (
@@ -116,8 +121,9 @@ const CreateNoteModal = () => {
               id="color"
               onChange={(e) => setNoteColor(e.target.value)}
             >
-              <option value="">White</option>
-              <option value="#ffcccc">Red</option>
+              <option value="">NoteColor</option>
+              <option value="#fff">White</option>
+              <option value="#ffcccd">Pink</option>
               <option value="#ccffcc">Green</option>
               <option value="#cce0ff">Blue</option>
               <option value="#ffffcc">Yellow</option>
