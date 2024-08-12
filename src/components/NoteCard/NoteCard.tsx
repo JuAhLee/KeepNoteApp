@@ -12,6 +12,7 @@ import { Note } from "../../types/note";
 import { useAppDispatch } from "../../hooks/redux";
 import getRelevantBts from "../../utils/getRelevantBtns";
 import { setPinnedNotes } from "../../store/notesList/notesListSlice";
+import parse from "html-react-parser";
 
 interface NoteCardProps {
   note: Note;
@@ -40,7 +41,7 @@ const NoteCard = ({ note, type }: NoteCardProps) => {
           )}
         </div>
       </TopBox>
-      <ContentBox>{content}</ContentBox>
+      <ContentBox>{parse(content)}</ContentBox>
       <TagsBox>
         {tags.map(({ tag, id }) => (
           <span key={id}>{tag}</span>
