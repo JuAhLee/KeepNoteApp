@@ -3,17 +3,20 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { DeleteBox, FixedContainer } from "../Modal.styles";
 import { Box, StyledInput, TagsBox } from "./TagsModal.styles";
 import { toggleTagsModal } from "../../../store/modal/modalSlice";
-import { FaTimes } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTimes } from "react-icons/fa";
 import getStandardName from "../../../utils/getStandardName";
 import { addTags, deleteTags } from "../../../store/tags/tagsSlice";
 import { removeTags } from "../../../store/notesList/notesListSlice";
 import { v4 } from "uuid";
+import { Tag } from "../../../types/tag";
 
 interface TagsModlaProps {
   type: string;
+  addedTags?: Tag[];
+  handleTags?: (tag: string, type: string) => void;
 }
 
-const TagsModal = ({ type }: TagsModlaProps) => {
+const TagsModal = ({ type, addedTags, handleTags }: TagsModlaProps) => {
   const dispatch = useAppDispatch();
   const { tagsList } = useAppSelector((state) => state.tags);
   const [inputText, setInputText] = useState("");
@@ -62,9 +65,21 @@ const TagsModal = ({ type }: TagsModlaProps) => {
           {tagsList.map(({ tag, id }) => (
             <li key={id}>
               <div className="editTags__tag">{getStandardName(tag)}</div>
-              <DeleteBox onClick={() => deleteTagsHandler(tag, id)}>
-                <FaTimes />
-              </DeleteBox>
+              {type === "edit" ? (
+                <DeleteBox onClick={() => deleteTagsHandler(tag, id)}>
+                  <FaTimes />
+                </DeleteBox>
+              ) : (
+                <DeleteBox>
+                  {addedTags?.find(
+                    (addedTag: Tag) => addedTag.tag === tag.toLowerCase()
+                  ) ? (
+                    <FaMinus onClick={() => handleTags!(tag, "remove")} />
+                  ) : (
+                    <FaPlus onClick={() => handleTags!(tag, "add")} />
+                  )}
+                </DeleteBox>
+              )}
             </li>
           ))}
         </TagsBox>

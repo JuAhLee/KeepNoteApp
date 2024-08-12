@@ -15,11 +15,15 @@ import {
 import { setEditNote } from "../../../store/notesList/notesListSlice";
 import { ButtonFill, ButtonOutline } from "../../../styles/styles";
 import { FaPlus, FaTimes } from "react-icons/fa";
+import TagsModal from "../TagsModal/TagsModal";
+import { addTags } from "../../../store/tags/tagsSlice";
+import { v4 } from "uuid";
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
 
   const { editNote } = useAppSelector((state) => state.notesList);
+  const { viewAddTagsModal } = useAppSelector((state) => state.modal);
 
   const [noteTitle, setNoteTitle] = useState(editNote?.title || "");
   const [value, setValue] = useState(editNote?.content || "");
@@ -32,8 +36,23 @@ const CreateNoteModal = () => {
     dispatch(setEditNote(null));
   };
 
+  const tagsHandler = (tag: string, type: string) => {
+    const newTag = tag.toLocaleLowerCase();
+
+    if (type === "add") {
+      setAddedTags((prev) => [...prev, { tag: newTag, id: v4() }]);
+    } else {
+      setAddedTags(addedTags.filter(({ tag }) => tag !== newTag));
+    }
+  };
+
   return (
     <FixedContainer>
+      {/* Add Tag Modal */}
+      {viewAddTagsModal && (
+        <TagsModal type="add" addedTags={addedTags} handleTags={tagsHandler} />
+      )}
+
       <Box>
         <TopBox>
           <div className="createNote_title">노트 생성하기</div>
@@ -69,7 +88,10 @@ const CreateNoteModal = () => {
           {addedTags.map(({ tag, id }) => (
             <div key={id}>
               <span className="createNote__tag">{tag}</span>
-              <span className="createNote__tag-remove">
+              <span
+                className="createNote__tag-remove"
+                onClick={() => tagsHandler(tag, "remove")}
+              >
                 <FaTimes />
               </span>
             </div>
