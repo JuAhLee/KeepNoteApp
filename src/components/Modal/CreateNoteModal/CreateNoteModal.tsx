@@ -12,13 +12,19 @@ import {
   toggleCreateNoteModal,
   toggleTagsModal,
 } from "../../../store/modal/modalSlice";
-import { setEditNote } from "../../../store/notesList/notesListSlice";
+import {
+  setEditNote,
+  setMainNotes,
+} from "../../../store/notesList/notesListSlice";
 import { ButtonFill, ButtonOutline } from "../../../styles/styles";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import TagsModal from "../TagsModal/TagsModal";
 import { addTags } from "../../../store/tags/tagsSlice";
 import { v4 } from "uuid";
 import TextEditor from "../../TextEditor/TextEditor";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { Note } from "../../../types/note";
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
@@ -45,6 +51,46 @@ const CreateNoteModal = () => {
     } else {
       setAddedTags(addedTags.filter(({ tag }) => tag !== newTag));
     }
+  };
+
+  const createNoteHandler = () => {
+    if (!noteTitle) {
+      toast.error("타이틀을 적어주세요.");
+      return;
+    } else if (value === "<p><br></p>") {
+      toast.error("글을 작성해주세요.");
+      return;
+    }
+
+    const date = dayjs().format("DD/MM/YY h:mm A");
+    // console.log("date", date);
+
+    let note: Partial<Note> = {
+      title: noteTitle,
+      content: value,
+      tags: addedTags,
+      color: noteColor,
+      priority,
+      editedTime: new Date().getTime(),
+    };
+
+    if (editNote) {
+      note = { ...editNote, ...note };
+    } else {
+      note = {
+        ...note,
+        date,
+        createdTime: new Date().getTime(),
+        editedTime: null,
+        isPinned: false,
+        isRead: false,
+        id: v4(),
+      };
+    }
+
+    dispatch(setMainNotes(note));
+    dispatch(toggleCreateNoteModal(false));
+    dispatch(setEditNote(null));
   };
 
   return (
@@ -74,18 +120,6 @@ const CreateNoteModal = () => {
 
         <div>
           <TextEditor color={noteColor} value={value} setValue={setValue} />
-        </div>
-
-        <div className="createNote__create-btn">
-          <ButtonFill>
-            {editNote ? (
-              <span>저장하기</span>
-            ) : (
-              <>
-                <FaPlus /> <span>생성하기</span>
-              </>
-            )}
-          </ButtonFill>
         </div>
 
         {/* tag */}
@@ -121,7 +155,6 @@ const CreateNoteModal = () => {
               id="color"
               onChange={(e) => setNoteColor(e.target.value)}
             >
-              <option value="">NoteColor</option>
               <option value="#fff">White</option>
               <option value="#ffcccd">Pink</option>
               <option value="#ccffcc">Green</option>
@@ -143,6 +176,19 @@ const CreateNoteModal = () => {
             </select>
           </div>
         </OptionsBox>
+
+        {/* 저장 | 생성 버튼 */}
+        <div className="createNote__create-btn">
+          <ButtonFill onClick={createNoteHandler}>
+            {editNote ? (
+              <span>저장하기</span>
+            ) : (
+              <>
+                <FaPlus /> <span>생성하기</span>
+              </>
+            )}
+          </ButtonFill>
+        </div>
       </Box>
     </FixedContainer>
   );

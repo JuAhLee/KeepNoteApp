@@ -5,7 +5,7 @@ const notes = [
     title: "Note 1 title",
     content: "Note 1 content",
     tags: [{ tag: "work", id: v4() }],
-    color: "#669900",
+    color: "#ccffcc",
     priority: "high",
     isPinned: true,
     isRead: false,
