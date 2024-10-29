@@ -1,30 +1,45 @@
-# React + TypeScript + Vite
+<h1> Notes 만들기 </h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **배포 링크 :** [포켓몬 도감 링크](채워넣기)
 
-Currently, two official plugins are available:
+<br>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div  align="center">
+  <img width="60%" height="350px" src="채워넣기" alt="Pokemon Page Gif">
+</div>
 
-## Expanding the ESLint configuration
+<br>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 기술 스택
 
-- Configure the top-level `parserOptions` property like this:
+|       vite       |     react     | Typescript |     |
+| :--------------: | :-----------: | :--------: | :-: |
+| styled-component | Redux/toolkit |  Netlify   |     |
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+<br>
+<br>
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 사용한 라이브러리 & 구현 기능
+
+<br>
+
+- ## 라이브러리 :
+ > ## React Router Dom
+
+> ## Redux/toolkit
+
+> ## react-quill
+
+> ## html-react-parser
+
+> ## toastify
+
+> ## uuid
+
+> ## dayjs
+
+<br>
+
+- ## 기능 :
+
+> ## modal(생성, 외부클릭시 닫힘)
