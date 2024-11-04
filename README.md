@@ -2,7 +2,7 @@
 
 <br>
 
-- **배포 링크 :** [Notes링크](채워넣기)
+- **배포 링크 :** [Notes링크](https://noteplan.netlify.app/)
 
 <br>
 
