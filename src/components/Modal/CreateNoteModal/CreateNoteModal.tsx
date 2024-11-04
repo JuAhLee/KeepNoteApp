@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { DeleteBox, FixedContainer } from "../Modal.styles";
 import {
@@ -19,7 +19,7 @@ import {
 import { ButtonFill, ButtonOutline } from "../../../styles/styles";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import TagsModal from "../TagsModal/TagsModal";
-import { addTags } from "../../../store/tags/tagsSlice";
+// import { addTags } from "../../../store/tags/tagsSlice";
 import { v4 } from "uuid";
 import TextEditor from "../../TextEditor/TextEditor";
 import { toast } from "react-toastify";

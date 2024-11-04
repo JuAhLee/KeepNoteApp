@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Container, StyledNav } from "./Navbar.styles";
 import { FiMenu } from "react-icons/fi";
 import { ButtonFill } from "../../styles/styles";
